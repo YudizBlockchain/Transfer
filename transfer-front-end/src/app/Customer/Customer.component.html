@@ -1,0 +1,86 @@
+<div class="container">
+
+
+    <div class="row">
+          <h2> Owner to Owner Transaction </h2>
+      </div>
+
+      <div class="row">
+    <br>
+  </div>
+
+    <div class="row RR">
+
+
+<div *ngIf="transactionFrom" class="col-md-offset-3 col-md-6">
+        <div class="panel panel-default">
+
+          <div class="panel-body">
+
+
+            <form #signupForm="ngForm" (ngSubmit)="registerUser(signupForm)">
+
+              <p>From:
+                <select name="sender" id="select1" ngModel>
+                  <option *ngFor="let asset of allAssets" value="{{asset.accountId}}">{{asset.accountId}}</option>
+                </select>
+                </p>
+
+                <p>To:
+                <select name="receiver" id="select2" ngModel>
+                  <option *ngFor="let asset of allAssets" value="{{asset.accountId}}">{{asset.accountId}}</option>
+                </select>
+                </p>
+
+              <p>Enter value<input name="money" id="moneyId" type="number" ngModel>
+                </p>
+
+              <button type="submit" class="btn btn-success">Transaction</button>
+            </form>
+
+
+<!--
+
+
+                <select name="assets" formControlName="ownerID" >
+                  <option *ngFor="let asset of allAssets" value="{{asset.accountId}}">{{asset.accountId}}</option>
+                </select>
+                </p>
+
+                <p>To:
+                <select name="residents" formControlName="ownersID" >
+                  <option *ngFor="let asset of allAssets" value="{{asset.accountId}}">{{asset.accountId}}</option>
+                </select>
+                </p>
+
+              <p>Enter value<input name="money" formControlName="energyValue" type="number" >
+              </p>-->
+        </div>
+      </div>
+</div>
+
+<div *ngIf="!transactionFrom" class="col-md-offset-3 col-md-6">
+  <div class="panel panel-default">
+        <div class="panel-heading"><strong>Transaction Executed</strong></div>
+        <div class="panel-body">
+
+          <form [formGroup]="myForm">
+            <p>Transaction ID: {{transactionID}}</p>
+            <br>
+          </form>
+        </div>
+      </div>
+
+</div>
+<!--
+<div class="row">
+  <div *ngIf="transactionFrom" class="col-md-offset-4 col-md-4">
+  <button (click)="execute();" type="button" class="btn btn-success" data-toggle="modal" >Execute Transaction</button>
+
+  </div>
+</div>
+
+-->
+
+    </div>
+</div>

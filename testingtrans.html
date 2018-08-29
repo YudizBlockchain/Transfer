@@ -1,0 +1,73 @@
+<script type="text/javascript" language="javascript">
+    function send() {
+        
+        var ItemJSON;
+        var from = document.getElementById('fromAccount').value;
+        var to = document.getElementById('toAccount').value;
+        var amt = document.getElementById('amount').value;
+        var time = new Date();
+        console.log(from);
+        console.log(to);
+        console.log(amt);
+        console.log(time);
+        
+
+        ItemJSON =
+            '[ { "$class": "test.AccountTransfer", "from": "' + from + '", "to": "' + to + '","amount":' + amt + ' , "timestamp": "' + time + '" }]';
+
+        URL = "http://localhost:3000/api/test.AccountTransfer"; //Your URL
+        if (URL) {
+            console.log("done");
+        }
+        else {
+            console.log("not done");
+
+        }
+
+
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = callbackFunction(xmlhttp);
+        xmlhttp.open("POST", URL, false);
+        xmlhttp.setRequestHeader("Content-Type", "application/json");
+        xmlhttp.setRequestHeader('Authorization', 'Basic ' + window.btoa('apiusername:apiuserpassword')); //in prod, you should encrypt user name and password and provide encrypted keys here instead 
+        xmlhttp.onreadystatechange = callbackFunction(xmlhttp);
+        xmlhttp.send(ItemJSON);
+        alert(xmlhttp.responseText);
+        document.getElementById("div").innerHTML = xmlhttp.statusText + ":" + xmlhttp.status +
+            "<BR><textarea rows='100' cols='100' style='margin: 0px; width: 920px; height: 122px;'>" + xmlhttp.responseText + "</textarea>";
+
+    }
+
+    function callbackFunction(xmlhttp) {
+        //alert(xmlhttp.responseXML);
+    }
+
+</script>
+
+
+<html>
+
+<body id='bod'>
+<label for="">List Of Account</label><br>
+<select id="fromAccount">
+    <option value="">From Account</option>
+    <option value="resource:test.Account#a1">a1</option>
+    <option value="resource:test.Account#a2">a2</option>
+    <option value="resource:test.Account#a3">a3</option>
+</select>
+<br>
+<select id="toAccount">
+    <option value="">To Account</option>
+    <option value="resource:test.Account#a1">a1</option>
+    <option value="resource:test.Account#a2">a2</option>
+    <option value="resource:test.Account#a3">a3</option>
+</select>
+<br>
+<input type="text" id="amount" />
+<button type="submit" onclick="javascript:send()">call</button>
+<div id='div'>
+
+    </div>
+</body>
+
+</html>
